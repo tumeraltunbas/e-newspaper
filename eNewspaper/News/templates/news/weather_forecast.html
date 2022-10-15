@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Weather Forecasts{% endblock %}
+
+{% block content %}
+{% include "partials/_navbar_default.html" %}
+
+
+<div class="container mt-5">
+    <p class="display-4 text-center mb-5">Weather Forecasts - {{context.weather.date|date:"d M Y"}}</p>
+    {% comment %} <p class="h2">{{context.weather.date|date:"d M y"}}</p> {% endcomment %}
+    <div class="row">
+      <div class="col">
+        {% for city in context.weather.cities %}
+        <div class="col-sm-8 h3 text-center">{{city}}</div>
+        {% endfor %}
+      </div>
+      <div class="col">
+        {% for forecast in context.weather.forecasts%}
+        <div class="col-sm-8 text-right h3" style=""><i class="bi bi-cloud-fill"></i> {{forecast}}°F</div>
+        {% endfor %} 
+      </div>
+    </div>
+</div>
+
+{% include "partials/_footer.html" %}
+
+{% endblock %}

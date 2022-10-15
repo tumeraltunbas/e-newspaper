@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{reporter.full_name}}{% endblock %}
+
+
+{% block content %}
+{% include "partials/_navbar_index.html" %}
+
+
+<div class="container text-center mt-5">
+    <img class="rounded" src="{{reporter.image.url}}" alt="">
+    <p class="display-4 mt-2">{{reporter.full_name}}</p>
+    <p class="text-left h3" style="letter-spacing:.2rem;border-bottom:1px solid black">BIOGRAPHY</p>
+    <p class="p-5" style="border-bottom:1px solid black">{{reporter.biography}}</p>
+    <p class="h2 mt-2 mb-2">Last News from {{reporter.full_name}}</p>
+    <div class="row mt-3">
+        {% for news in reporter_news %}
+        <div class="col-sm-9 mt-2">
+            <a class="text-dark" href="{% url 'news_details' news.slug %}"><p class="h3">{{news.title}}</p>  </a>      
+            <p class="h6">{{news.subtitle}}</p>
+        </div>
+        <div class="col-sm-2 mt-2">
+            <img style="width:350px;padding:10px" class="rounded" src="{{news.image.url}}" alt="">
+        </div>
+        {% endfor %}
+    </div> 
+</div>
+
+
+{% include "partials/_footer.html" %}
+{% endblock %}

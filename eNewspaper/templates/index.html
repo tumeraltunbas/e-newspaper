@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include "partials/_navbar_index.html" %}
+
+{% include "partials/_currency_bar.html" %}
+    <div class="row mb-5 w-100">
+        <div class="col-sm-8 ml-5 mt-3">
+            <div class="row">
+                {% for news in card_news %}
+                <div class="col-sm mt-2">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{news.image.url}}" alt="Card image cap">
+                        <div class="card-body">
+                        <p class="card-title text-center h6"><a href="{% url 'news_details' news.slug %}" class="text-decoration-none text-dark">{{news.title}}</a></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>            
+        </div>
+        {% include "partials/_bar_list.html" %}
+    </div>
+
+    <div class="container">
+        <p class="display-4">Other News</p>
+        <div class="row">
+            {% for news in list_news %}
+                <div class="col-sm-9 mt-2">
+                    <a class="text-dark text-decoration-none" href="{% url 'news_details' news.slug %}"><p class="h3">{{news.title}}</p>  </a>      
+                    <p class="h6">{{news.subtitle}}</p>
+                </div>
+                <div class="col-sm-2 mt-2">
+                    <img style="width:350px;padding:10px" class="rounded" src="{{news.image.url}}" alt="">
+                </div>
+          {% endfor %}
+        </div>
+    </div>
+    {% include "partials/_footer.html" %}
+
+{% endblock %}

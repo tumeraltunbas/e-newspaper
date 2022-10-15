@@ -1,0 +1,33 @@
+{% load static %}
+<style>
+    @font-face {
+        font-family: my-font ;
+        src: url({% static 'fonts/Chomsky.otf' %});
+    }
+</style>
+<nav class="border-bottom sticky-top" style="background-color:#fff">
+    <div class="row w-100">
+        <div class="w-25 mt-4">
+            <button class="btn btn-light border font-weight-bold ml-3" style="width:5rem" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Topics</button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                  <h4 class="offcanvas-title border-bottom" id="offcanvasExampleLabel">Topics</h4>
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <div>
+                    <ul>
+                        {% for topic in topics %}
+                        <li class="list-group-item mt-3"><a class="text-dark text-decoration-none h4" href="{% url 'get_news_by_topic' topic.slug %}">{{topic.topic_name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-50">
+            <a class="display-3 text-center text-dark" href="{% url 'index' %}" style="font-family:my-font;text-decoration:None;"><p class="text-center;border-bottom">e-Newspaper</p></a>
+        </div>
+    </div>
+</nav>
